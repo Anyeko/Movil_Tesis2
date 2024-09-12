@@ -159,7 +159,6 @@ public class Helper {
         final AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(title);
         alert.setMessage(message);
-        alert.setIcon(R.drawable.ic_error);
         alert.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
             public void onClick(final DialogInterface dialog, final int whichButton) {
                 mResult = true;
