@@ -25,7 +25,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/bienvenida" <!-- Asegúrate de tener esta imagen en la carpeta drawable -->/>
+                android:src="@drawable/bienvenida"/>
 
             <!-- Título de Bienvenida -->
             <TextView
@@ -77,7 +77,7 @@
                     android:id="@+id/btn_adulto_mayor"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/adulto_mayor" <!-- Asegúrate de tener esta imagen en la carpeta drawable -->/>
+                    android:src="@drawable/adulto_mayor"/>
 
 
             </LinearLayout>
