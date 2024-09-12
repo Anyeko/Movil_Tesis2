@@ -7,17 +7,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.avsolucions.movil_tesis.databinding.ActivityMainBinding;
 import com.avsolucions.movil_tesis.model.Sesion;
 import com.avsolucions.movil_tesis.response.LoginResponse;
 import com.avsolucions.movil_tesis.retrofit.ApiService;
 import com.avsolucions.movil_tesis.retrofit.RetrofitClient;
 import com.avsolucions.movil_tesis.util.Helper;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-
-
-
-import com.avsolucions.movil_tesis.databinding.ActivityMainBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,20 +25,18 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextInputEditText txtIdentificador, txtClave;
-    MaterialButton btnIngresar;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
 
-        txtIdentificador = findViewById(R.id.txtIdentificador); // Campo para DNI o correo
-        txtClave = findViewById(R.id.txtClave); // Campo de contraseña
-        btnIngresar = findViewById(R.id.btnIngresar);
+        // Inicializar ViewBinding
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Listener del botón de inicio de sesión
-        btnIngresar.setOnClickListener(new View.OnClickListener() {
+        binding.btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
@@ -58,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         ApiService apiService = RetrofitClient.createService();
 
         // Obtener las credenciales (DNI o correo y contraseña)
-        String identificador = txtIdentificador.getText().toString(); // Puede ser DNI o correo
-        String clave = Helper.convertPassMd5(txtClave.getText().toString()); // Cifrado de la contraseña
+        String identificador = binding.txtIdentificador.getText().toString(); // Puede ser DNI o correo
+        String clave = Helper.convertPassMd5(binding.txtClave.getText().toString()); // Cifrado de la contraseña
 
         // Realizar la petición al servicio web
         Call<LoginResponse> call = apiService.login(identificador, clave);
