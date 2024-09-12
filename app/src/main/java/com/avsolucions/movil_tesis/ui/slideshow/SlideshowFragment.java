@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.avsolucions.movil_tesis.MainActivity;
 import com.avsolucions.movil_tesis.R;
 import androidx.lifecycle.ViewModelProvider;
-import com.avsolucions.movil_tesis.databindig.FragmentSlideshowBinding;
+import com.avsolucions.movil_tesis.databinding.FragmentSlideshowBinding;
 
 public class SlideshowFragment extends Fragment {
 
