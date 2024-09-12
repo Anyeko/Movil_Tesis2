@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    public static final String URL_API_SERVICE = "http://10.0.2.2:3306"; // URL de tu servidor
+    public static final String URL_API_SERVICE = "http://10.0.2.2:5000"; // URL de tu servidor
 
     private static Retrofit retrofit = null;
 
