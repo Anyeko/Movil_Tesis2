@@ -42,10 +42,10 @@
                 android:id="@+id/user_icon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_user_icon" <!-- Asegúrate de tener esta imagen en la carpeta drawable -->/>
+                android:layout_marginTop="16dp"/>
+            <!--android:src="@drawable/ic_user_icon"-->
 
-            <!-- Título de Inicio de Sesión -->
+          <!-- Título de Inicio de Sesión -->
             <TextView
                 android:id="@+id/login_title"
                 android:layout_width="wrap_content"

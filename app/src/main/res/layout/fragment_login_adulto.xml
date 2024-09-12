@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_smoke"
-    tools:context=".LoginActivity">
+    tools:context=".MainActivity">
 
     <!-- Botón de Volver -->
     <Button
@@ -42,8 +42,8 @@
                 android:id="@+id/user_icon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_user_icon" <!-- Asegúrate de tener esta imagen en la carpeta drawable -->/>
+                android:layout_marginTop="16dp"/>
+            <!--android:src="@drawable/ic_user_icon Asegúrate de tener esta imagen en la carpeta drawable -->
 
             <!-- Título de Inicio de Sesión -->
             <TextView
