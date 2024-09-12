@@ -47,12 +47,20 @@ public class MainActivity extends AppCompatActivity {
     private void login() {
         Log.e("LOGIN", "INICIANDO SESIÓN");
 
+        // Obtener las credenciales (DNI o correo y contraseña)
+        String identificador = binding.txtIdentificador.getText().toString();
+        String clave = Helper.convertPassMd5(binding.txtClave.getText().toString());
+
+        Log.e("LOGIN", "Identificador: " + identificador + ", Clave: " + clave);
+
+
+        if (identificador.isEmpty() || clave.isEmpty()) {
+            Helper.mensajeError(MainActivity.this, "Error de inicio de sesión", "Por favor ingresa tu usuario y contraseña");
+            return;
+        }
+
         // Crear una instancia de ApiService para hacer la petición al servicio web
         ApiService apiService = RetrofitClient.createService();
-
-        // Obtener las credenciales (DNI o correo y contraseña)
-        String identificador = binding.txtIdentificador.getText().toString(); // Puede ser DNI o correo
-        String clave = Helper.convertPassMd5(binding.txtClave.getText().toString()); // Cifrado de la contraseña
 
         // Realizar la petición al servicio web
         Call<LoginResponse> call = apiService.login(identificador, clave);
