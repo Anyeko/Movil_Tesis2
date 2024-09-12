@@ -13,5 +13,5 @@ import com.avsolucions.movil_tesis.response.LoginResponse;
 public interface ApiService {
     @FormUrlEncoded
     @POST("/login")
-    Call<LoginResponse> login(@Field("email") String email, @Field("clave") String clave);
+    Call<LoginResponse> login(@Field("identificador") String identificador, @Field("clave") String clave);
 }
