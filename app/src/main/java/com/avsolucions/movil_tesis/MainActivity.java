@@ -1,66 +1,108 @@
 package com.avsolucions.movil_tesis;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.Menu;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.avsolucions.movil_tesis.model.Sesion;
+import com.avsolucions.movil_tesis.response.LoginResponse;
+import com.avsolucions.movil_tesis.retrofit.ApiService;
+import com.avsolucions.movil_tesis.retrofit.RetrofitClient;
+import com.avsolucions.movil_tesis.util.Helper;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+
+
 
 import com.avsolucions.movil_tesis.databinding.ActivityMainBinding;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
+    TextInputEditText txtIdentificador, txtClave;
+    MaterialButton btnIngresar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        txtIdentificador = findViewById(R.id.txtIdentificador); // Campo para DNI o correo
+        txtClave = findViewById(R.id.txtClave); // Campo de contraseña
+        btnIngresar = findViewById(R.id.btnIngresar);
 
-        setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+        // Listener del botón de inicio de sesión
+        btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
+            public void onClick(View v) {
+                login();
             }
         });
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+    private void login() {
+        Log.e("LOGIN", "INICIANDO SESIÓN");
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        // Crear una instancia de ApiService para hacer la petición al servicio web
+        ApiService apiService = RetrofitClient.createService();
+
+        // Obtener las credenciales (DNI o correo y contraseña)
+        String identificador = txtIdentificador.getText().toString(); // Puede ser DNI o correo
+        String clave = Helper.convertPassMd5(txtClave.getText().toString()); // Cifrado de la contraseña
+
+        // Realizar la petición al servicio web
+        Call<LoginResponse> call = apiService.login(identificador, clave);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.code() == 200) { // Login exitoso
+                    LoginResponse loginResponse = response.body();
+
+                    boolean status = loginResponse.isStatus();
+                    if (status) {
+                        String nombre = loginResponse.getData().getNombre();
+                        Log.e("LOGIN", "Nombre de usuario: " + nombre);
+
+                        // Almacenar los datos de la sesión
+                        Sesion.DATOS_SESION = loginResponse.getData();
+
+                        // Redirigir al menú principal
+                        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                        startActivity(intent);
+
+                        // Cerrar la actividad actual
+                        MainActivity.this.finish();
+                    } else {
+                        Helper.mensajeError(MainActivity.this, "Error de inicio de sesión", "Credenciales incorrectas o cuenta inactiva");
+                    }
+
+                } else { // Error en la autenticación (códigos 401 o 500)
+                    try {
+                        JSONObject jsonObjectError = new JSONObject(response.errorBody().string());
+                        String message = jsonObjectError.getString("message");
+                        Helper.mensajeError(MainActivity.this, "Error de Login", message);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                // Error de conexión
+                Helper.mensajeError(MainActivity.this, "Error de conexión", t.toString());
+            }
+        });
     }
 }

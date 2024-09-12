@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="IDENTIFICATE"
+                android:text="Comencemos"
                 android:textAlignment="center"
                 android:textSize="40sp"
                 android:textColor="@color/dark_orange" />
@@ -77,16 +77,8 @@
                     android:id="@+id/btn_adulto_mayor"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
-                    android:layout_marginEnd="8dp"
                     android:src="@drawable/adulto_mayor" <!-- Asegúrate de tener esta imagen en la carpeta drawable -->/>
 
-                <!-- Botón Imagen 2 (Profesional de Salud) -->
-                <ImageButton
-                    android:id="@+id/btn_profesional_salud"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="8dp"
-                    android:src="@drawable/profesional_salud" <!-- Asegúrate de tener esta imagen en la carpeta drawable -->/>
 
             </LinearLayout>
 
