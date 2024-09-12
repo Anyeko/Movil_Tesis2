@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_smoke"
-    tools:context=".RegistroEspecialistaActivity">
+    android:background="@color/white_smoke">
 
     <!-- Botón de Salir -->
     <Button
@@ -172,7 +171,6 @@
                 android:id="@+id/sp_disponibilidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/disponibilidad_opciones"
                 android:layout_marginTop="8dp"/>
 
             <!-- Campo de Contraseña -->
