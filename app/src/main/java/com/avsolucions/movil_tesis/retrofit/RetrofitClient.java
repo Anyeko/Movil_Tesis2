@@ -15,7 +15,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class RetrofitClient {
-    public static final String URL_API_SERVICE = "http://10.0.2.2:5000"; // URL de tu servidor
+    public static final String URL_API_SERVICE = "http://161.132.56.198:5000"; // URL de tu servidor
 
     private static Retrofit retrofit = null;
 
