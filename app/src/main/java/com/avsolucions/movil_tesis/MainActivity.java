@@ -49,10 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Obtener las credenciales (DNI o correo y contraseña)
         String identificador = binding.txtIdentificador.getText().toString();
-        String contrasena = Helper.convertPassMd5(binding.txtClave.getText().toString());
+        String contrasena = binding.txtContrasena.getText().toString(); // Aquí ya no se usa MD5
 
-        Log.e("LOGIN", "Identificador: " + identificador + ", Clave: " + contrasena);
-
+        Log.e("LOGIN", "Identificador: " + identificador + ", Contrasena: " + contrasena);
 
         if (identificador.isEmpty() || contrasena.isEmpty()) {
             Helper.mensajeError(MainActivity.this, "Error de inicio de sesión", "Por favor ingresa tu usuario y contraseña");
