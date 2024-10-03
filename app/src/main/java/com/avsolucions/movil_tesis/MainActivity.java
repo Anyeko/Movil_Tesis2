@@ -69,22 +69,34 @@ public class MainActivity extends AppCompatActivity {
                 if (response.code() == 200) { // Login exitoso
                     LoginResponse loginResponse = response.body();
 
-                    boolean status = loginResponse.isStatus();
-                    if (status) {
-                        String nombre = loginResponse.getData().getNombre();
-                        Log.e("LOGIN", "Nombre de usuario: " + nombre);
+                    if (loginResponse != null) {
+                        boolean status = loginResponse.isStatus();
+                        if (status) {
+                            // Extraer los datos de sesión
+                            Sesion sesion = loginResponse.getData();
+                            if (sesion != null) {
+                                String nombre = sesion.getCorreo(); // O cualquier otro dato que necesites
+                                Log.e("LOGIN", "Nombre de usuario: " + nombre);
 
-                        // Almacenar los datos de la sesión
-                        Sesion.DATOS_SESION = loginResponse.getData();
+                                // Almacenar los datos de la sesión
+                                Sesion.DATOS_SESION = loginResponse.getData();
 
-                        // Redirigir al menú principal
-                        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-                        startActivity(intent);
+                                // Redirigir al menú principal
+                                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                                startActivity(intent);
 
-                        // Cerrar la actividad actual
-                        MainActivity.this.finish();
+                                // Cerrar la actividad actual
+                                MainActivity.this.finish();
+                            } else {
+                                Log.e("LOGIN", "Datos de sesión nulos.");
+                                Helper.mensajeError(MainActivity.this, "Error de sesión", "No se pudieron recuperar los datos de sesión.");
+                            }
+                        } else {
+                            Helper.mensajeError(MainActivity.this, "Error de inicio de sesión", "Credenciales incorrectas o cuenta inactiva");
+                        }
                     } else {
-                        Helper.mensajeError(MainActivity.this, "Error de inicio de sesión", "Credenciales incorrectas o cuenta inactiva");
+                        Log.e("LOGIN", "Respuesta nula del servidor.");
+                        Helper.mensajeError(MainActivity.this, "Error de inicio de sesión", "Error al procesar la respuesta del servidor.");
                     }
 
                 } else { // Error en la autenticación (códigos 401 o 500)
@@ -97,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {

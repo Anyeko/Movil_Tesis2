@@ -1,71 +1,54 @@
 package com.avsolucions.movil_tesis.model;
 
-public class Sesion {
-    private int id;
-    private String dni; // DNI del usuario
-    private String email; // Correo del usuario
-    private String nombre; // Nombre del usuario
-    private String estado_usuario;
-    private String token; // Token de sesión
-    private String rol;
+import com.google.gson.annotations.SerializedName;
 
-    // Declarar un atributo para almacenar los datos de la sesión iniciada por el usuario
+public class Sesion {
+
+    // Variable estática para almacenar los datos de sesión
     public static Sesion DATOS_SESION;
 
-    public int getId() {
-        return id;
+    @SerializedName("ID_usuario")  // Mapeo para ID del usuario
+    private int idUsuario;
+
+    @SerializedName("correo")  // Mapeo para el correo del usuario
+    private String correo;
+
+    @SerializedName("tipo_usuario")  // Mapeo para el tipo de usuario (paciente, administrador, etc.)
+    private String tipoUsuario;
+
+    @SerializedName("estado")  // Mapeo para el estado (activo o inactivo)
+    private String estado;
+
+    // Getters and Setters
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getDni() {
-        return dni;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
-
-    public String getEstado_usuario() {
-        return estado_usuario;
-    }
-
-    public void setEstado_usuario(String estado_usuario) {
-        this.estado_usuario = estado_usuario;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
 }
