@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.avsolucions.movil_tesis.R;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
@@ -37,7 +38,20 @@ public class MenuActivity extends AppCompatActivity {
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Configurar la toolbar
+        // Configurar la toolbar y la navegación
+        configurarNavegacion();
+
+        // Mostrar los datos del usuario que ha iniciado sesión
+        mostrarDatosUsuario();
+
+        // Configurar la visibilidad de los botones del menú según el rol del usuario
+        configurarVisibilidadBotones();
+    }
+
+    /**
+     * Método para configurar la navegación del menú principal.
+     */
+    private void configurarNavegacion() {
         NavController navController = Navigation.findNavController(MenuActivity.this, R.id.nav_host_fragment_content_menu);
 
         // Configurar el DrawerLayout y el NavigationView
@@ -46,21 +60,26 @@ public class MenuActivity extends AppCompatActivity {
 
         // Configurar los destinos del menú
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home) // Ajustar los IDs según tus destinos
+                R.id.nav_home) // Ajustar los IDs según los destinos
                 .setOpenableLayout(drawer)
                 .build();
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
 
+    /**
+     * Método para mostrar los datos del usuario en la cabecera del menú.
+     */
+    private void mostrarDatosUsuario() {
         // Enlazar los controles de la cabecera del menú
+        NavigationView navigationView = binding.navView;
         View headerView = navigationView.getHeaderView(0);
         imgUsuario = headerView.findViewById(R.id.imgUsuario);
         txtUsuario = headerView.findViewById(R.id.txtUsuario);
         txtEmail = headerView.findViewById(R.id.txtEmail);
 
-        // Mostrar los datos del usuario que ha iniciado sesión
+        // Mostrar los datos del usuario
         txtUsuario.setText(Sesion.DATOS_SESION.getNombre());
         txtEmail.setText(Sesion.DATOS_SESION.getEmail());
 
@@ -68,6 +87,21 @@ public class MenuActivity extends AppCompatActivity {
         Glide.with(MenuActivity.this)
                 .load(RetrofitClient.URL_API_SERVICE + Sesion.DATOS_SESION.getDni())
                 .into(imgUsuario);
+    }
+
+    /**
+     * Método para configurar la visibilidad de los botones según el rol del usuario.
+     */
+    private void configurarVisibilidadBotones() {
+        String rolUsuario = Sesion.DATOS_SESION.getRol();
+
+        if (rolUsuario.equals("paciente")) {
+            // Ocultar el botón de la opción 7 si el rol es paciente
+            findViewById(R.id.btnOpcion7).setVisibility(View.GONE);
+        } else {
+            // Mostrar todas las opciones si es especialista o administrador
+            findViewById(R.id.btnOpcion7).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

@@ -18,7 +18,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true" />
 
     <!-- Contenedor ScrollView para hacer la interfaz desplazable -->
     <ScrollView
@@ -37,21 +37,14 @@
             android:gravity="center"
             android:background="@color/white_smoke">
 
-            <!-- Imagen del Icono de Usuario -->
-            <ImageView
-                android:id="@+id/user_icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="16dp"/>
-
             <!-- Título de Inicio de Sesión -->
             <TextView
                 android:id="@+id/login_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="INICIO DE SESION"
-                android:textSize="20sp"
+                android:layout_marginTop="32dp"
+                android:text="INICIO DE SESIÓN"
+                android:textSize="22sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center" />
@@ -60,7 +53,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 app:endIconMode="clear_text"
                 android:hint="DNI o Correo">
 
@@ -78,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:endIconMode="password_toggle"
-                android:hint="CONTRASEÑA">
+                android:hint="Contraseña">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtClave"
@@ -93,7 +86,7 @@
                 android:id="@+id/btnIngresar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:text="INICIAR"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/blue" />
@@ -103,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center">
 
                 <!-- Enlace para Olvidar Contraseña -->
@@ -111,7 +104,7 @@
                     android:id="@+id/tv_olvide_contrasena"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OLVIDE MI CONTRASEÑA"
+                    android:text="OLVIDÉ MI CONTRASEÑA"
                     android:textSize="14sp"
                     android:textColor="@color/gray"
                     android:layout_marginEnd="16dp" />
@@ -126,8 +119,6 @@
                     android:textColor="@color/blue" />
 
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>

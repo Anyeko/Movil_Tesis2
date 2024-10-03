@@ -7,6 +7,7 @@ public class Sesion {
     private String nombre; // Nombre del usuario
     private String estado_usuario;
     private String token; // Token de sesión
+    private String rol;
 
     // Declarar un atributo para almacenar los datos de la sesión iniciada por el usuario
     public static Sesion DATOS_SESION;
@@ -57,6 +58,14 @@ public class Sesion {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
 }

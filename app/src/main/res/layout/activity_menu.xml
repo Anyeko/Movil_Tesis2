@@ -1,25 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    tools:context=".MenuActivity">
+    android:background="@color/white_smoke"
+    android:padding="16dp">
 
-    <include
-        layout="@layout/app_bar_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+    <!-- Título del menú -->
+    <TextView
+        android:id="@+id/menu_title"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menú Principal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <!-- NavHostFragment para cargar fragmentos -->
+    <fragment
+        android:id="@+id/nav_host_fragment_content_menu"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_menu"
-        app:menu="@menu/activity_main_drawer" />
-</androidx.drawerlayout.widget.DrawerLayout>
+        app:navGraph="@navigation/mobile_navigation"
+        android:layout_below="@id/menu_title"
+        app:defaultNavHost="true" />
+
+    <!-- Contenedor ScrollView -->
+    <ScrollView
+        android:id="@+id/scrollViewMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/menu_title"
+        android:layout_marginTop="16dp">
+
+        <!-- GridLayout dentro del ScrollView -->
+        <GridLayout
+            android:id="@+id/gridLayoutMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="4"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <!-- Botón circular 1 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpcion1"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="Opción 1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="60dp"
+                android:layout_margin="16dp" />
+
+            <!-- Botón circular 2 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpcion2"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="Opción 2"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="60dp"
+                android:layout_margin="16dp" />
+
+            <!-- Botón circular 3 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpcion3"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="Opción 3"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="60dp"
+                android:layout_margin="16dp" />
+
+            <!-- Botón circular 4 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpcion4"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="Opción 4"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="60dp"
+                android:layout_margin="16dp" />
+
+            <!-- Botón circular 5 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpcion5"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="Opción 5"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="60dp"
+                android:layout_margin="16dp" />
+
+            <!-- Botón circular 6 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpcion6"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="Opción 6"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="60dp"
+                android:layout_margin="16dp" />
+
+            <!-- Botón circular 7 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpcion7"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="Opción 7"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="60dp"
+                android:layout_margin="16dp" />
+
+        </GridLayout>
+    </ScrollView>
+
+</RelativeLayout>
+
+
